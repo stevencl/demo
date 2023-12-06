@@ -1,5 +1,6 @@
 package com.example;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Class to store collections of numbers.
@@ -10,16 +11,8 @@ public class NumberCollections {
 
     public NumberCollections(int a, int b) {
         
-        divisibleNumbers = new ArrayList<>();
-        primeNumbers = new ArrayList<>();
-        for (int i = 0; i <= b; i++) {
-            if (i % a == 0) {
-                divisibleNumbers.add(i);
-            }
-            if (isPrime(i)) {
-                primeNumbers.add(i);
-            }
-        }
+        IntStream.rangeClosed(a, b).filter(i -> i % a == 0).forEach(divisibleNumbers::add);
+        IntStream.rangeClosed(a, b).filter(this::isPrime).forEach(primeNumbers::add);
     }
 
     private boolean isPrime(int n) {
